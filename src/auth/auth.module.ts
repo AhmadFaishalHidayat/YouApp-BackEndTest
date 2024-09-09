@@ -10,16 +10,16 @@ import { UserSchema } from './schemas/user.schema';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: '.env',
-      isGlobal: true,
-    }),
-    MongooseModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        uri: configService.get<string>('DB_URI'),
-      }),
-    }),
+    //   ConfigModule.forRoot({
+    //     envFilePath: '.env',
+    //     isGlobal: true,
+    //   }),
+    //   MongooseModule.forRootAsync({
+    //     inject: [ConfigService],
+    //     useFactory: (configService: ConfigService) => ({
+    //       uri: configService.get<string>('DB_URI'),
+    //     }),
+    //   }),
 
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({

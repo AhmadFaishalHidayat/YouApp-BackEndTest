@@ -1,24 +1,65 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import {
+  IsNotEmpty,
+  IsString,
+  IsNumber,
+  IsArray,
+  IsOptional,
+} from 'class-validator';
 
-@Schema({
-  timestamps: true,
-})
-export class User extends Document {
-  @Prop()
-  name: string;
+export class CreateUserProfileDto {
+  @IsNotEmpty()
+  @IsString()
+  readonly name: string;
 
-  @Prop()
-  birthday: string;
+  @IsNotEmpty()
+  @IsString()
+  readonly birthday: string;
 
-  @Prop()
-  height: number;
+  @IsNotEmpty()
+  @IsNumber()
+  readonly height: number;
 
-  @Prop()
-  weight: number;
+  @IsNotEmpty()
+  @IsNumber()
+  readonly weight: number;
 
-  @Prop()
-  interests: string[];
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  readonly interests: string[];
 }
 
-export const UserSchema = SchemaFactory.createForClass(User);
+export class UpdateUserProfileDto {
+  @IsOptional()
+  @IsString()
+  readonly name?: string;
+
+  @IsOptional()
+  @IsString()
+  readonly birthday?: string;
+
+  @IsOptional()
+  @IsNumber()
+  readonly height?: number;
+
+  @IsOptional()
+  @IsNumber()
+  readonly weight?: number;
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  readonly interests?: string[];
+}
+
+export class AddInterestDto {
+  @IsNotEmpty()
+  @IsString()
+  readonly interest: string;
+}
+
+export class DeleteInterestDto {
+  @IsNotEmpty()
+  @IsString()
+  readonly interest: string;
+}
